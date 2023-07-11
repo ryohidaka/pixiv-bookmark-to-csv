@@ -69,6 +69,14 @@ def write_to_csv(self, file, data):
 
     self.logger.info("[Start] Writing to CSV file")
 
+    # Check if the mode is "all".
+    if self.mode == "all":
+        self.logger.info(f"Reset: {file.name}")
+        # Overwrite the file.
+        file.truncate(0)
+        writer = csv.DictWriter(file, fieldnames=headers)
+        writer.writeheader()
+
     # Create a CSV writer.
     writer = csv.DictWriter(file, fieldnames=headers)
 

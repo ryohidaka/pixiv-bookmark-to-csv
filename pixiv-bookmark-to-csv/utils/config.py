@@ -10,13 +10,16 @@ REFRESH_TOKEN = os.environ.get("REFRESH_TOKEN")
 USER_ID = os.environ.get("USER_ID")
 
 
-def get_restrict() -> str:
+def get_args():
     """
     Get the type of target to be retrieved from the command-line argument.
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("--restrict", default="public")
+    parser.add_argument("--mode", default="diff")
     args = parser.parse_args()
-    restrict = args.restrict
 
-    return restrict
+    return {
+        "restrict": args.restrict,
+        "mode": args.mode,
+    }

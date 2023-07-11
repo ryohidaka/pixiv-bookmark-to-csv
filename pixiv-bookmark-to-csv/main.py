@@ -1,4 +1,4 @@
-from utils.config import get_restrict
+from utils.config import get_args
 from utils.csv import get_last_id, output
 from utils.logger import init_logger
 from utils.pixiv import get_bookmarks, init_api
@@ -12,9 +12,15 @@ class AppClass:
         # Initialize the API.
         self.api = init_api(self)
 
+        args = get_args()
+
         # Get the type of the target user.
-        self.restrict = get_restrict()
+        self.restrict = args["restrict"]
         self.logger.info(f"Target: {self.restrict}")
+
+        # Get the mode.
+        self.mode = args["mode"]
+        self.logger.info(f"Mode: {self.mode}")
 
         # Define the CSV file name.
         csv_file = f"output/{self.restrict}.csv"

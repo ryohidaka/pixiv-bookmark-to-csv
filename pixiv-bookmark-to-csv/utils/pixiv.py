@@ -47,7 +47,7 @@ def get_bookmarks(self, last_id):
 
             for data in illusts:
                 # If the data.id is already registered in the CSV file, stop the processing.
-                if data.id == last_id:
+                if data.id == last_id and self.mode == "diff":
                     self.logger.info("The ID is already registered in the CSV file.")
                     duplicated = True
                     break

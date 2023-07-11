@@ -8,8 +8,6 @@ class AppClass:
         self.logger = init_logger()
 
     def main(self):
-        self.logger.info("This is the main function.")
-
         # Initialize the API.
         self.api = init_api(self)
 

@@ -44,10 +44,14 @@ def get_bookmarks(self):
             illusts = res.illusts
 
             for data in illusts:
+                # Get custom tags
+                tags = get_custom_tags(api, data.id)
+
                 # Create a bookmark.
                 bookmark = {
                     "id": data.id,
                     "title": data.title,
+                    "tags": tags,
                     "type": data.type,
                     "user_id": data.user.id,
                     "user_name": data.user.name,
@@ -73,3 +77,28 @@ def get_bookmarks(self):
     logger.info("[End] Getting bookmark list")
 
     return bookmarks
+
+
+def get_custom_tags(api, id: int):
+    """
+    Get custom tags and return them.
+
+    Parameters
+    ----------
+    api : Any
+        API instance
+
+    id : int
+        Image ID
+    """
+
+    # Wait for API request
+    time.sleep(1)
+
+    # Get bookmark tag list
+    bookmark_tags = api.illust_bookmark_detail(id)["bookmark_detail"]["tags"]
+
+    # Get registered tags in an array
+    registered_tags = [item["name"] for item in bookmark_tags if item["is_registered"]]
+
+    return registered_tags

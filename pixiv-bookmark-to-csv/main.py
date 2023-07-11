@@ -1,4 +1,5 @@
 from utils.logger import init_logger
+from utils.pixiv import init_api
 
 
 class AppClass:
@@ -7,6 +8,9 @@ class AppClass:
 
     def main(self):
         self.logger.info("This is the main function.")
+
+        # Initialize the API.
+        self.api = init_api(self)
 
 
 if __name__ == "__main__":

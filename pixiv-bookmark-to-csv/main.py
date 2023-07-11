@@ -1,6 +1,6 @@
 from utils.config import get_restrict
 from utils.logger import init_logger
-from utils.pixiv import init_api
+from utils.pixiv import get_bookmarks, init_api
 
 
 class AppClass:
@@ -14,6 +14,9 @@ class AppClass:
         # Get the type of the target user.
         self.restrict = get_restrict()
         self.logger.info(f"Target: {self.restrict}")
+
+        # Get the list of bookmarks.
+        bookmarks = get_bookmarks(self)
 
 
 if __name__ == "__main__":

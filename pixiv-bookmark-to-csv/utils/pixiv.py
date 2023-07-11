@@ -24,7 +24,7 @@ def init_api(self) -> AppPixivAPI:
     return api
 
 
-def get_bookmarks(self):
+def get_bookmarks(self, last_id):
     """
     Get a list of bookmarks.
     """
@@ -39,11 +39,19 @@ def get_bookmarks(self):
     res = api.user_bookmarks_illust(USER_ID, restrict=self.restrict)
     time.sleep(5)
 
+    duplicated = False
+
     while True:
         try:
             illusts = res.illusts
 
             for data in illusts:
+                # If the data.id is already registered in the CSV file, stop the processing.
+                if data.id == last_id:
+                    self.logger.info("The ID is already registered in the CSV file.")
+                    duplicated = True
+                    break
+
                 # Get custom tags
                 tags = get_custom_tags(api, data.id)
 
@@ -58,6 +66,9 @@ def get_bookmarks(self):
                 }
 
                 bookmarks.append(bookmark)
+
+            if duplicated:
+                break
 
             next_url = res.next_url
             logger.info(f"Next URL: {next_url}")

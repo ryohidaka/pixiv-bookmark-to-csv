@@ -77,3 +77,34 @@ def write_to_csv(self, file, data):
         writer.writerow(row)
 
     self.logger.info("[End] Writing to CSV file")
+
+
+def get_last_id(self, csv_file) -> int:
+    """
+    Get the last ID from a CSV file.
+
+    Parameters
+    ----------
+    csv_file: str
+        The name of the CSV file.
+    """
+
+    try:
+        with open(csv_file, "r") as file:
+            reader = csv.reader(file)
+            rows = list(reader)
+
+            if len(rows) > 1:
+                last_row = rows[-1]
+                last_id = int(last_row[0])
+
+                file.close()
+            else:
+                last_id = None
+
+    except FileNotFoundError:
+        last_id = None
+
+    self.logger.info(f"Last ID: {last_id}")
+
+    return last_id

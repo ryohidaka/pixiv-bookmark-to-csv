@@ -1,5 +1,5 @@
 from utils.config import get_restrict
-from utils.csv import output
+from utils.csv import get_last_id, output
 from utils.logger import init_logger
 from utils.pixiv import get_bookmarks, init_api
 
@@ -16,11 +16,14 @@ class AppClass:
         self.restrict = get_restrict()
         self.logger.info(f"Target: {self.restrict}")
 
-        # Get the list of bookmarks.
-        bookmarks = get_bookmarks(self)
-
         # Define the CSV file name.
         csv_file = f"output/{self.restrict}.csv"
+
+        # Get the last ID registered in the CSV file.
+        last_id = get_last_id(self, csv_file)
+
+        # Get the list of bookmarks.
+        bookmarks = get_bookmarks(self, last_id)
 
         # Output the list of users to the CSV file.
         output(self, csv_file, bookmarks)

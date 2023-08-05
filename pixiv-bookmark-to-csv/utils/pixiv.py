@@ -72,10 +72,10 @@ def get_bookmarks(self, last_id):
                 break
 
             next_url = res.next_url
-            logger.info(f"Next URL: {next_url}")
 
             if next_url:
                 next_qs = api.parse_qs(res.next_url)
+                logger.info(f"Next: {next_qs}")
                 time.sleep(2)
                 res = api.user_bookmarks_illust(**next_qs)
                 time.sleep(2)

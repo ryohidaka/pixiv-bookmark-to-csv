@@ -3,7 +3,7 @@ import os
 
 
 # Define the CSV headers
-headers = ["id", "title", "tags", "type", "user_id", "user_name"]
+headers = ["id", "title", "custom_tags", "type", "user_id", "user_name"]
 
 
 def output(self, csv_file, data):

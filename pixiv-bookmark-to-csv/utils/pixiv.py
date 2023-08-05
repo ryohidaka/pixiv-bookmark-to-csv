@@ -53,13 +53,13 @@ def get_bookmarks(self, last_id):
                     break
 
                 # Get custom tags
-                tags = get_custom_tags(api, data.id)
+                custom_tags = get_custom_tags(api, data.id)
 
                 # Create a bookmark.
                 bookmark = {
                     "id": data.id,
                     "title": data.title,
-                    "tags": tags,
+                    "custom_tags": custom_tags,
                     "type": data.type,
                     "user_id": data.user.id,
                     "user_name": data.user.name,

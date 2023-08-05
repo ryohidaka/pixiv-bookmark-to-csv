@@ -59,6 +59,7 @@ def get_bookmarks(self, last_id):
                 bookmark = {
                     "id": data.id,
                     "title": data.title,
+                    "tags": [tag["name"] for tag in data.tags],
                     "custom_tags": custom_tags,
                     "type": data.type,
                     "user_id": data.user.id,
